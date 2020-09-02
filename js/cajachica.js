@@ -68,7 +68,7 @@ $("#CajaChicaForm").submit(async function (e) {
             throw query;
         }
     } catch (error) {
-        console.error(error);
+        console.log(error);
         AlertaFallido();
     }
 });

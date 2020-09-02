@@ -30,11 +30,11 @@ include("./php/conexion.php")
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center"  href="dashboard.php">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-home"></i>
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
+                <div class="sidebar-brand-icon ">
+                    <i class="fas fa-tools"></i>
                 </div>
-                <div class="sidebar-brand-text mx-1">Control Cost Center</div>
+                <div class="sidebar-brand-text mx-1">Solutec Express</div>
             </a>
             <!-- Divider -->
             <hr class="sidebar-divider my-0" />
@@ -48,71 +48,78 @@ include("./php/conexion.php")
             <hr class="sidebar-divider" />
             <!-- Heading -->
             <div class="sidebar-heading">
-                Administration
+                Administración
             </div>
             <li class="nav-item ">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
                     aria-expanded="true" aria-controls="collapseOne">
                     <i class="fas fa-briefcase"></i>
-                    <span>Projects</span>
+                    <span>Ordenes</span>
                 </a>
                 <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Administration</h6>
-                        <a class="collapse-item " href="proyectos.php">Project management</a>
+                        <h6 class="collapse-header">Ordenes</h6>
+                        <!-- <a class="collapse-item " href="proyectos.php">Project management</a>
                         <a class="collapse-item" href="materiales.php">Purchase management</a>
-                        <a class="collapse-item" href="reportes.php">Employees Reports</a>
-                        <a class="collapse-item" href="reportesP.php">Projects/Provider Reports</a>
+                        <a class="collapse-item" href="reportes.php">Employees Reports</a>-->
+                        <a class="collapse-item" href="">En Construcción</a>
                     </div>
                 </div>
             </li>
-            <li class="nav-item  ">
-                <a class="nav-link" href="cotizaciones.php">
-                    <i class="fas fa-file-invoice-dollar"></i>
-                    <span>Activities quote</span></a>
-            </li>
             <!-- Divider -->
+            <li class="nav-item  ">
+                <a class="nav-link" href="cajachica.php">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <span>Caja Chica</span></a>
+            </li>
             <hr class="sidebar-divider" />
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Previous Data
+                Data Previa
             </div>
             <!-- Nav Item - Charts -->
             <li class="nav-item ">
                 <a class="nav-link" href="clientes.php">
                     <i class="fas fa-user-tie"></i>
-                    <span>Clients</span></a>
+                    <span>Clientes</span></a>
             </li>
-
             <li class="nav-item ">
-                <a class="nav-link " href="propiedades.php">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInve"
+                    aria-expanded="true" aria-controls="collapseInve">
                     <i class="fas fa-building"></i>
-                    <span>Properties</span></a>
+                    <span>Inventario</span>
+                </a>
+                <div id="collapseInve" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Inventario</h6>
+                        <a class="collapse-item" href="inventario.php">Administración de inventario</a>
+                        <a class="collapse-item" href="inventarioM.php">Movimientos del inventario</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item ">
                 <a class="nav-link" href="providers.php">
                     <i class="fas fa-boxes"></i>
-                    <span>Providers</span></a>
+                    <span>Proovedores</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block" />
             <div class="sidebar-heading">
-                Employees
+                Empleados
             </div>
             <li class="nav-item ">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-users-cog"></i>
-                    <span>Employees Management</span>
+                    <span>Tecnicos</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Administrar</h6>
-                        <a class="collapse-item " href="empleados.php">Employees</a>
-                        <a class="collapse-item" href="labor.php">Work time</a>
+                        <a class="collapse-item" href="">En Construcción</a>
                     </div>
                 </div>
             </li>
@@ -154,7 +161,7 @@ include("./php/conexion.php")
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Cerrar sesión
                                 </a>
                             </div>
                         </li>
@@ -164,7 +171,7 @@ include("./php/conexion.php")
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Administrator</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Administrador</span>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -178,14 +185,14 @@ include("./php/conexion.php")
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Cerrar sesión
                                 </a>
                             </div>
                         </li>
 
 
 
-                        
+
                     </ul>
                 </nav>
                 <!-- End of Topbar -->
@@ -243,7 +250,7 @@ include("./php/conexion.php")
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">
-                    Providers table
+                    Tabla de proveedores
                   </h6>
                 </div>
                 <div class="card-body">

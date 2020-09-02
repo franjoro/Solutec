@@ -85,11 +85,19 @@ if (isset($_SESSION['user'])) {
                     <i class="fas fa-user-tie"></i>
                     <span>Clientes</span></a>
             </li>
-
             <li class="nav-item ">
-                <a class="nav-link " href="">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInve"
+                    aria-expanded="true" aria-controls="collapseInve">
                     <i class="fas fa-building"></i>
-                    <span>Inventario</span></a>
+                    <span>Inventario</span>
+                </a>
+                <div id="collapseInve" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Inventario</h6>
+                        <a class="collapse-item" href="inventario.php">Administración de inventario</a>
+                        <a class="collapse-item" href="inventarioM.php">Movimientos del inventario</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Nav Item - Tables -->
@@ -201,16 +209,16 @@ if (isset($_SESSION['user'])) {
                     <div class="row">
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href="proyectos.php">
+                            <a href="">
                                 <div class="card border-left-primary shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Project Management
+                                                    Ordenes
                                                 </div>
                                                 <div class="h6 mb-0 font-weight-bold text-gray-800">
-                                                    Create, and edit new projects
+                                                    Crea y edita tus ordenes
                                                 </div>
                                             </div>
                                             <div class="col-auto">
@@ -224,16 +232,16 @@ if (isset($_SESSION['user'])) {
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href="materiales.php">
+                            <a href="clientes.php">
                                 <div class="card border-left-success shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Purchase management
+                                                    Clientes
                                                 </div>
                                                 <div class="h6 mb-0 font-weight-bold text-gray-800">
-                                                    Add new costs to your projects
+                                                    Agrega nuevos clientes a tu directorio
                                                 </div>
                                             </div>
                                             <div class="col-auto">
@@ -247,16 +255,16 @@ if (isset($_SESSION['user'])) {
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href="labor.php">
+                            <a href="cajachica.php">
                                 <div class="card border-left-info shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                    Work Time
+                                                    Caja chica
                                                 </div>
                                                 <div class="h6 mb-0 font-weight-bold text-gray-800">
-                                                    Manage the working hours of your employees
+                                                    Ordena tus finanzas diarias
                                                 </div>
                                             </div>
                                             <div class="col-auto">
@@ -270,16 +278,16 @@ if (isset($_SESSION['user'])) {
 
                         <!-- Pending Requests Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href="reportes.php">
+                            <a href="">
                                 <div class="card border-left-warning shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                    Projects/Provider Reports
+                                                    Reportes de Ordenes/Inventario 
                                                 </div>
                                                 <div class="h6 mb-0 font-weight-bold text-gray-800">
-                                                    Download your data
+                                                   Descarga tu información
                                                 </div>
                                             </div>
                                             <div class="col-auto">

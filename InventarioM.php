@@ -1,7 +1,8 @@
 <?php
 session_start();
-if(isset($_SESSION['user'])){ 
-include("./php/conexion.php")
+if (isset($_SESSION['user'])) {
+    include("./php/conexion.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +14,7 @@ include("./php/conexion.php")
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>Project Manager</title>
+    <title>Reporte de Movimientos de Inventario</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
@@ -22,6 +23,7 @@ include("./php/conexion.php")
         rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
 
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet" />
 </head>
@@ -198,112 +200,44 @@ include("./php/conexion.php")
                     </ul>
                 </nav>
                 <!-- End of Topbar -->
-
-
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Mis Clientes</h1>
-
-
-
+                    <h1 class="h3 mb-4 text-gray-800">Movimientos del inventario</h1>
                     <div class="row">
                         <!-- Content Column -->
-                        <div class="col-lg-4 mb-4">
-                            <!-- Project Card Example -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Agregar nuevo cliente</h6>
-                                </div>
-                                <div class="card-body">
-
-                                    <form id="clienteForm">
-                                        <div class="form-group">
-                                            <label for="inputAddress">Nombre *</label>
-                                            <input type="text" required class="form-control form-control-sm"
-                                                name="name">
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="inputEmail4">Email</label>
-                                                <input type="email" class="form-control form-control-sm" name="email">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="inputPassword4">Contacto</label>
-                                                <input type="text" autocomplete class="form-control form-control-sm"
-                                                    name="contact">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="inputAddress2">Dirección</label>
-                                            <textarea class="form-control form-control-sm" name="address"></textarea>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="inputCity">Teléfono</label>
-                                                <input type="text" class="form-control form-control-sm" name="phoneOf">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="inputState">Teléfono Otro</label>
-                                                <input type="text" class="form-control form-control-sm" name="phoneCel">
-
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputAddress2">Notas</label>
-                                            <textarea class="form-control form-control-sm" name="notes"></textarea>
-
-                                        </div>
-                                        <button id="New_button" type="submit"
-                                            class="btn btn-primary visible">Agregar</button>
-                                    </form>
-
-                                    <button id="loader" class="btn btn-primary invisible" disabled>
-                                        <span class="spinner-border spinner-border-sm" id="loader" role="status"
-                                            aria-hidden="true"></span>
-                                    </button>
-
-
-                                </div>
-                            </div>
-
-
-                        </div>
-
-                        <div class="col-lg-8 mb-4">
+                        <div class="col-lg-12 mb-4">
                             <!-- Illustrations -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">
-                                        Directorio de clientes
+                                        Movimientos
                                     </h6>
                                 </div>
                                 <div class="card-body">
-
-
+                                    <div id="reportrange"
+                                        style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                        <i class="fa fa-calendar"></i>&nbsp;
+                                        <span></span> <i class="fa fa-caret-down"></i>
+                                    </div>
+                                    <hr>
                                     <div class="table-responsive">
-                                        <div id="clientTable"></div>
+                                        <div id="PTable"></div>
                                     </div>
                                 </div>
                             </div>
-
                             <!-- Approach -->
                         </div>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
-
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <!-- <span>Copyright &copy; Your Website 2020</span> -->
+                        <!-- <span>Copyright &copy; Your Website 2019</span> -->
                     </div>
                 </div>
             </footer>
@@ -343,32 +277,35 @@ include("./php/conexion.php")
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <!-- <script src="vendor/jquery-easing/jquery.easing.min.js"></script> -->
-
-    <!-- Custom scripts for all pages-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="js/sb-admin-2.min.js"></script>
-    <!-- Page level plugins -->
 
-
-    <!-- all my things -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
-    <script src="js/request_handler.js"></script>
-    <script>
-    $(document).ready(function() {
-        tablaClientes();
-    })
     </script>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js">
+    </script>
+    <script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js">
+    </script>
+    <script async type="text/javascript"
+        src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.21/b-1.6.3/b-flash-1.6.3/b-html5-1.6.3/b-print-1.6.3/datatables.min.js">
+    </script>
+    <script src="js/inventarioM.js"></script>
 
+
+    <script>
+    $(document).ready(function() {
+
+    })
+    </script>
 </body>
 
 </html>
-<?php 
-} else { 
+<?php
+} else {
     header("location:php/destroy.php");
 }
 ?>

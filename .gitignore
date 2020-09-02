@@ -1,0 +1,4 @@
+imagenes/*
+
+# exception to the rule
+!imagenes/.gitkeep 
