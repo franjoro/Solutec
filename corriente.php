@@ -1,6 +1,8 @@
-<?php session_start();
+<?php
+session_start();
 if (isset($_SESSION['user'])) {
-    include("./php/conexion.php")
+    include("./php/conexion.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,11 +21,11 @@ if (isset($_SESSION['user'])) {
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet" />
-
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet" />
 </head>
-
 
 <body id="page-top">
     <!-- Page Wrapper -->
@@ -71,7 +73,7 @@ if (isset($_SESSION['user'])) {
             <li class="nav-item  ">
                 <a class="nav-link" href="cajachica.php">
                     <i class="fas fa-file-invoice-dollar"></i>
-                    <span>Cuentas </span></a>
+                    <span>Caja Chica</span></a>
             </li>
             <hr class="sidebar-divider" />
 
@@ -197,129 +199,104 @@ if (isset($_SESSION['user'])) {
                     </ul>
                 </nav>
                 <!-- End of Topbar -->
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Atajos</h1>
-                    </div>
-
-                    <!-- Content Row -->
+                    <h1 class="h3 mb-4 text-gray-800">Fondos de cuenta corriente</h1>
+                    <h6>Fondos disponibles: <span id="fondosDis"></span></h6>
                     <div class="row">
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <a href="">
-                                <div class="card border-left-primary shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Ordenes
-                                                </div>
-                                                <div class="h6 mb-0 font-weight-bold text-gray-800">
-                                                    Crea y edita tus ordenes
-                                                </div>
+                        <!-- Content Column -->
+                        <div class="col-lg-12 mb-4">
+                            <!-- Project Card Example -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Nuevo movimiento </h6>
+                                </div>
+                                <div class="card-body">
+                                    <form id="CajaChicaForm">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <label for="inputAddress">Concepto *</label>
+                                                <input type="text" required class="form-control form-control-sm"
+                                                    id="concepto" name="concepto">
                                             </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-briefcase fa-2x text-gray-300"></i>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputAddress">Fecha *</label>
+                                                <input type="text" required class="form-control form-control-sm"
+                                                    id="datepicker" name="date">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">Operación</label>
+                                                <select name="op" required class="form-control form-control-sm">
+                                                    <option disabled selected>Seleccionar operación</option>
+                                                    <option value="0" class="text-primary">Depositar</option>
+                                                    <option value="1" class="text-danger">Deducir</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">Monto*</label>
+                                                <div class="input-group input-group-sm mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"
+                                                            id="inputGroup-sizing-sm">$</span>
+                                                    </div>
+                                                    <input type="text" name="monto" id="monto" required
+                                                        class="form-control" aria-label="Small"
+                                                        aria-describedby="inputGroup-sizing-sm">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                                        <button id="New_button" type="submit"
+                                            class="btn btn-primary visible float-right">Agregar</button>
+                                    </form>
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <a href="clientes.php">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Clientes
-                                                </div>
-                                                <div class="h6 mb-0 font-weight-bold text-gray-800">
-                                                    Agrega nuevos clientes a tu directorio
-                                                </div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-project-diagram fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <button id="loader" class="btn btn-primary invisible float-right" disabled>
+                                        <span class="spinner-border spinner-border-sm" id="loader" role="status"
+                                            aria-hidden="true"></span>
+                                    </button>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <a href="cajachica.php">
-                                <div class="card border-left-info shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                    Caja chica
-                                                </div>
-                                                <div class="h6 mb-0 font-weight-bold text-gray-800">
-                                                    Ordena tus finanzas diarias
-                                                </div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
+                        <div class="col-lg-12 mb-4">
+                            <!-- Illustrations -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        Movimientos
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div id="reportrange"
+                                        style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                        <i class="fa fa-calendar"></i>&nbsp;
+                                        <span></span> <i class="fa fa-caret-down"></i>
+                                    </div>
+                                    <hr>
+                                    <div class="table-responsive">
+                                        <div id="PTable"></div>
                                     </div>
                                 </div>
-                            </a>
-                        </div>
-
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <a href="">
-                                <div class="card border-left-warning shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                    Reportes de Ordenes/Inventario 
-                                                </div>
-                                                <div class="h6 mb-0 font-weight-bold text-gray-800">
-                                                   Descarga tu información
-                                                </div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-paperclip fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                            </div>
+                            <!-- Approach -->
                         </div>
                     </div>
-
-                    <!-- Content Row -->
-
-                    <!-- Content Row -->
-
                 </div>
                 <!-- /.container-fluid -->
             </div>
             <!-- End of Main Content -->
-
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
-                    <!-- <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2019</span>
-                    </div> -->
+                    <div class="copyright text-center my-auto">
+                        <!-- <span>Copyright &copy; Your Website 2019</span> -->
+                    </div>
                 </div>
             </footer>
             <!-- End of Footer -->
+
         </div>
         <!-- End of Content Wrapper -->
+
     </div>
     <!-- End of Page Wrapper -->
 
@@ -334,19 +311,15 @@ if (isset($_SESSION['user'])) {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">¿Listo para irte?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    Selecciona "Salir" si estas deseas cerrar tu sesión actual
-                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">
-                        Cancel
-                    </button>
-                    <a class="btn btn-primary" href="php/destroy.php">Salir</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="php/destroy.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -355,15 +328,28 @@ if (isset($_SESSION['user'])) {
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+        integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script src="js/jquery.mask.js"></script>
+    <script src="js/cajachica.js"></script>
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> -->
-
+    <script>
+    $(document).ready(function() {
+        saldoDisponible();
+        $("#datepicker").datepicker({
+            dateFormat: "mm/dd/yy"
+        });
+        $("#monto").mask("000,000,000,000,000.00", {
+            reverse: !0
+        });
+    })
+    </script>
 </body>
 
 </html>

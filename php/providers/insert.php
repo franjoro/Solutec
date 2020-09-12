@@ -1,7 +1,7 @@
 <?php
 require_once("../conexion.php");
-$sql = "INSERT INTO tb_proveedores(name,address,tel,notes) 
-VALUES('".$_POST['name']."','".$_POST['direccion']."' ,'".$_POST['tel']."' ,'".$_POST['notas']."') ";
+$sql = "INSERT INTO tb_proveedores(name,address,tel,notes,contacto,telcontacto) 
+VALUES('".$_POST['name']."','".$_POST['direccion']."' ,'".$_POST['tel']."' ,'".$_POST['notas']."' ,'".$_POST['contacto']."' ,'".$_POST['telContacto']."') ";
 if($query =mysqli_query($mysqli,$sql )){
    echo true;
 } else{
@@ -9,3 +9,8 @@ if($query =mysqli_query($mysqli,$sql )){
 }
 mysqli_close($mysqli);
 ?>
+
+
+
+
+

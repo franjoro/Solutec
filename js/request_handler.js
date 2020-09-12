@@ -376,6 +376,111 @@ $("#clientProviders").on("click", "tbody td", function () {
       });
   });
 });
+
+
+$("#tecform").submit(function (e) {
+  e.preventDefault();
+  const t = $(this).serialize();
+  $.ajax({
+    url: "php/tecnicos/insert.php",
+    type: "post",
+    data: t,
+    beforeSend: () => {
+      $("#New_button").css("display", "none"),
+        $("#loader").removeClass("invisible").addClass("visible");
+    },
+  })
+    .done(function (e) {
+      console.log(e);
+      tablaTecnicos(),
+        AlertaExito(),
+        $("#New_button").css("display", "block"),
+        $("#loader").removeClass("visible").addClass("invisible"),
+        $("#tecform")[0].reset();
+    })
+    .fail(function (e, t, o) {
+      AlertaFallido();
+    });
+});
+
+
+const tablaTecnicos = () => {
+  $.ajax({ url: "php/tecnicos/tabla.php" }).done(function (e) {
+    $("#tecTable").html(e), $("#dataTable").DataTable();
+  });
+};
+
+
+$("#tecTable").on("click", "tbody td", function () {
+  const e = $(this).data();
+  if ("delete" === e.tabla)
+    return (
+      (t = e.code),
+      void Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this! ID ctz: " + t,
+        icon: "warning",
+        showCancelButton: !0,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((e) => {
+        if (e.value) {
+          const e = new Promise((e, o) => {
+            $.ajax({ url: "php/tecnicos/eliminar.php?id=" + t }).done(() => {
+              e();
+            });
+          });
+          Promise.all([e]).then(
+            Swal.fire(
+              "Deleted!",
+              "Your file has been deleted.",
+              "success"
+            ).then(() => {
+              location.reload();
+            })
+          );
+        }
+      })
+    );
+  var t;
+  Swal.fire({
+    title: "Edit cell",
+    text:
+      "You will edit a cell this will be reflected in the reporting information ",
+    input: "text",
+    inputValue: $(this).text(),
+    icon: "info",
+    showCancelButton: !0,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, edit it!",
+  }).then((t) => {
+    t.value &&
+      $.ajax({
+        url: "php/edit.php",
+        data: {
+          tabla: e.tabla,
+          columna: e.columna,
+          campo: t.value,
+          code: e.code,
+        },
+        type: "POST",
+      }).done((e) => {
+        AlertaExito(), tablaTecnicos();
+      });
+  });
+});
+
+
+
+
+
+
+
+
+
+
 const tablaEmpleados = () => {
   $.ajax({ url: "php/empleados/tabla.php" }).done(function (e) {
     $("#tableEmpleado").html(e), $("#dataTable").DataTable();

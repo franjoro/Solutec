@@ -1,6 +1,7 @@
-<?php session_start();
-if (isset($_SESSION['user'])) {
-    include("./php/conexion.php")
+<?php
+session_start();
+if(isset($_SESSION['user'])){ 
+include("./php/conexion.php")
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,11 +20,11 @@ if (isset($_SESSION['user'])) {
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet" />
 </head>
-
 
 <body id="page-top">
     <!-- Page Wrapper -->
@@ -71,7 +72,7 @@ if (isset($_SESSION['user'])) {
             <li class="nav-item  ">
                 <a class="nav-link" href="cajachica.php">
                     <i class="fas fa-file-invoice-dollar"></i>
-                    <span>Cuentas </span></a>
+                    <span>Caja Chica</span></a>
             </li>
             <hr class="sidebar-divider" />
 
@@ -200,126 +201,85 @@ if (isset($_SESSION['user'])) {
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Atajos</h1>
-                    </div>
+                    <h1 class="h3 mb-4 text-gray-800">Técnicos</h1>
 
-                    <!-- Content Row -->
+
+
                     <div class="row">
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <a href="">
-                                <div class="card border-left-primary shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Ordenes
-                                                </div>
-                                                <div class="h6 mb-0 font-weight-bold text-gray-800">
-                                                    Crea y edita tus ordenes
-                                                </div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-briefcase fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                        <!-- Content Column -->
+                        <div class="col-lg-3 mb-4">
+                            <!-- Project Card Example -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Agregar nuevo técnicos</h6>
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <a href="clientes.php">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Clientes
-                                                </div>
-                                                <div class="h6 mb-0 font-weight-bold text-gray-800">
-                                                    Agrega nuevos clientes a tu directorio
-                                                </div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-project-diagram fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
-                            </a>
-                        </div>
+                                <div class="card-body">
+                                    <form id="tecform">
+                                        <div class="form-group">
+                                            <label for="inputAddress">Nombre *</label>
+                                            <input type="text" required class="form-control form-control-sm" id="name"
+                                                name="name">
+                                        </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <a href="cajachica.php">
-                                <div class="card border-left-info shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                    Caja chica
-                                                </div>
-                                                <div class="h6 mb-0 font-weight-bold text-gray-800">
-                                                    Ordena tus finanzas diarias
-                                                </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputEmail4">Teléfono</label>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    name="tel">
                                             </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputPassword4">Tel. de emergencia</label>
+                                                <input type="text" class="form-control form-control-sm" name="telemer">
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                                        <button id="New_button" type="submit"
+                                            class="btn btn-primary visible">Insert</button>
+                                    </form>
 
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <a href="">
-                                <div class="card border-left-warning shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                    Reportes de Ordenes/Inventario 
-                                                </div>
-                                                <div class="h6 mb-0 font-weight-bold text-gray-800">
-                                                   Descarga tu información
-                                                </div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-paperclip fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
+                                    <button id="loader" class="btn btn-primary invisible" disabled>
+                                        <span class="spinner-border spinner-border-sm" id="loader" role="status"
+                                            aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 mb-4">
+                            <!-- Illustrations -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        Tabla de técnicos
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <div id="tecTable"></div>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
+                            <!-- Approach -->
                         </div>
                     </div>
-
-                    <!-- Content Row -->
-
-                    <!-- Content Row -->
-
                 </div>
                 <!-- /.container-fluid -->
             </div>
             <!-- End of Main Content -->
-
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
-                    <!-- <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2019</span>
-                    </div> -->
+                    <div class="copyright text-center my-auto">
+                        <!-- <span>Copyright &copy; Your Website 2019</span> -->
+                    </div>
                 </div>
             </footer>
             <!-- End of Footer -->
+
         </div>
         <!-- End of Content Wrapper -->
+
     </div>
     <!-- End of Page Wrapper -->
 
@@ -334,19 +294,15 @@ if (isset($_SESSION['user'])) {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">¿Listo para irte?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    Selecciona "Salir" si estas deseas cerrar tu sesión actual
-                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">
-                        Cancel
-                    </button>
-                    <a class="btn btn-primary" href="php/destroy.php">Salir</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="php/destroy.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -361,14 +317,24 @@ if (isset($_SESSION['user'])) {
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <!-- Page level plugins -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js">
+    </script>
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> -->
+    <!-- Page level custom scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="js/request_handler.js"></script>
 
+    <script>
+    $(document).ready(function() {
+        tablaTecnicos();
+    })
+    </script>
 </body>
 
 </html>
-<?php
-} else {
+<?php 
+} else { 
     header("location:php/destroy.php");
 }
 ?>

@@ -4,7 +4,7 @@ session_start();
 $pin=$_POST['pin'];
 $pass = md5($_POST['pass']);
 
-$sql = "SELECT COUNT(*) , code FROM tb_users  WHERE user='".$pin. "' AND pass='" . $pass . "'  ";
+$sql = "SELECT COUNT(*) , code FROM tb_users  WHERE user='".$pin. "' AND pass='" . $pass . "'  GROUP By code  ";
 $query = mysqli_query($mysqli, $sql);
 $row= mysqli_fetch_array($query);
 
