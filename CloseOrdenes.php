@@ -12,18 +12,14 @@ include("./php/conexion.php")
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-
     <title>Project Manager</title>
-
-    <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
-
-    <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 
 <body id="page-top">
@@ -59,7 +55,7 @@ include("./php/conexion.php")
                     <span>Ordenes</span>
                 </a>
                 <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
+                    <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Ordenes</h6>
                         <a class="collapse-item " href="ordenes.php">Nueva orden</a>
                         <a class="collapse-item" href="showOrdenes.php">Ordenes abiertas</a>
@@ -118,7 +114,7 @@ include("./php/conexion.php")
                     <span>Tecnicos</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
+                    <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Administrar</h6>
                         <a class="collapse-item" href="tecnicos.php">Administrar técnicos</a>
                         <a class="collapse-item" href="planilla.php">Ver planilla</a>
@@ -191,103 +187,96 @@ include("./php/conexion.php")
                                 </a>
                             </div>
                         </li>
-
-
-
-
                     </ul>
                 </nav>
                 <!-- End of Topbar -->
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Proveedor</h1>
-
-
-
+                    <h1 class="h3 mb-4 text-gray-800">Ordenes Cerradas</h1>
                     <div class="row">
-                        <!-- Content Column -->
-                        <div class="col-lg-3 mb-4">
-                            <!-- Project Card Example -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Agregar nuevo proveedor</h6>
-
-                                </div>
-                                <div class="card-body">
-                                    <form id="providersForm">
-                                        <div class="form-group">
-                                            <label for="inputAddress">Nombre *</label>
-                                            <input type="text" required class="form-control form-control-sm" id="name"
-                                                name="name">
-                                        </div>
-
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="inputEmail4">Dirección</label>
-                                                <input type="text" class="form-control form-control-sm"
-                                                    name="direccion">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="inputPassword4">Teléfono</label>
-                                                <input type="text" class="form-control form-control-sm" name="tel">
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="inputEmail4">Contacto</label>
-                                                <input type="text" class="form-control" name="contacto">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="inputPassword4">Tel. Contacto</label>
-                                                <input type="text" class="form-control" name="telContacto">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="inputAddress2">Notas</label>
-                                            <textarea class="form-control form-control-sm" name="notas"></textarea>
-
-                                        </div>
-                                        <button id="New_button" type="submit"
-                                            class="btn btn-primary visible">Insert</button>
-                                    </form>
-
-                                    <button id="loader" class="btn btn-primary invisible" disabled>
-                                        <span class="spinner-border spinner-border-sm" id="loader" role="status"
-                                            aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-9 mb-4">
-                            <!-- Illustrations -->
+                        <div class="col-lg-6 mb-4">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">
-                                        Tabla de proveedores
+                                        Tipo de reporte
                                     </h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive">
-                                        <div id="clientProviders"></div>
+                                    <label>Tipo de pago</label>
+                                    <select name="pago" class="form-control form-control-sm" id="pago">
+                                        <option selected value="All">Todos</option>
+                                        <option value="1">Recibo</option>
+                                        <option value="2">Crédito Fiscal</option>
+                                        <option value="3">Factura</option>
+                                    </select>
+                                    <hr>
+                                    <label>Tipo de Artículo</label>
+                                    <select name="articulo" class="form-control form-control-sm" id="articulo">
+                                        <option selected value="All">Todos</option>
+                                        <option value="A/C">A/C</option>
+                                        <option value="Secadora">Secadora</option>
+                                        <option value="Freezer">Freezer</option>
+                                        <option value="Camara Refrigerante">Camara
+                                            Refrigerante</option>
+                                        <option value="Cocina">Cocina</option>
+                                        <option value="Lavadora">Lavadora</option>
+                                        <option value="Refrigeradora">Refrigeradora</option>
+                                        <option value="Oasis">Oasis</option>
+                                        <option value="Otro">Otro</option>
+                                    </select>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        Fecha
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div id="reportrange"
+                                        style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                        <i class="fa fa-calendar"></i>&nbsp;
+                                        <span></span> <i class="fa fa-caret-down"></i>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 mb-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        Reportes
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+
+
+                                    <div class="table-responsive">
+                                        <div id="clientTable"></div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Approach -->
                         </div>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
+
             </div>
             <!-- End of Main Content -->
+
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <!-- <span>Copyright &copy; Your Website 2019</span> -->
+                        <!-- <span>Copyright &copy; Your Website 2020</span> -->
                     </div>
                 </div>
             </footer>
@@ -329,23 +318,27 @@ include("./php/conexion.php")
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- <script src="vendor/jquery-easing/jquery.easing.min.js"></script> -->
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
     <!-- Page level plugins -->
+
+
+    <!-- all my things -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js">
     </script>
-
-    <!-- Page level custom scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <script src="js/request_handler.js"></script>
-
-    <script>
-    $(document).ready(function() {
-        tablaProvedores();
-    })
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js">
     </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js">
+    </script>
+    <script async type="text/javascript"
+        src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.21/b-1.6.3/b-flash-1.6.3/b-html5-1.6.3/b-print-1.6.3/datatables.min.js">
+    </script>
+    <script src="js/reportes.js"></script>
+
 </body>
 
 </html>

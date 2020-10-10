@@ -60,10 +60,9 @@ if (isset($_SESSION['user'])) {
                 <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Ordenes</h6>
-                        <!-- <a class="collapse-item " href="proyectos.php">Project management</a>
-                        <a class="collapse-item" href="materiales.php">Purchase management</a>
-                        <a class="collapse-item" href="reportes.php">Employees Reports</a>-->
-                        <a class="collapse-item" href="">En Construcción</a>
+                        <a class="collapse-item " href="ordenes.php">Nueva orden</a>
+                        <a class="collapse-item" href="showOrdenes.php">Ordenes abiertas</a>
+                        <a class="collapse-item" href="CloseOrdenes.php">Historial de ordenes</a>
                     </div>
                 </div>
             </li>
@@ -71,7 +70,7 @@ if (isset($_SESSION['user'])) {
             <li class="nav-item  ">
                 <a class="nav-link" href="cajachica.php">
                     <i class="fas fa-file-invoice-dollar"></i>
-                    <span>Cuentas </span></a>
+                    <span>Caja Chica</span></a>
             </li>
             <hr class="sidebar-divider" />
 
@@ -120,7 +119,8 @@ if (isset($_SESSION['user'])) {
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Administrar</h6>
-                        <a class="collapse-item" href="">En Construcción</a>
+                        <a class="collapse-item" href="tecnicos.php">Administrar técnicos</a>
+                        <a class="collapse-item" href="planilla.php">Ver planilla</a>
                     </div>
                 </div>
             </li>

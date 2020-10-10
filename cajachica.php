@@ -2,7 +2,6 @@
 session_start();
 if (isset($_SESSION['user'])) {
     include("./php/conexion.php");
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,9 +12,7 @@ if (isset($_SESSION['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-
     <title>Project Manager</title>
-
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
     <link
@@ -26,7 +23,6 @@ if (isset($_SESSION['user'])) {
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet" />
 </head>
-
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -60,12 +56,11 @@ if (isset($_SESSION['user'])) {
                     <span>Ordenes</span>
                 </a>
                 <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Ordenes</h6>
-                        <!-- <a class="collapse-item " href="proyectos.php">Project management</a>
-                        <a class="collapse-item" href="materiales.php">Purchase management</a>
-                        <a class="collapse-item" href="reportes.php">Employees Reports</a>-->
-                        <a class="collapse-item" href="">En Construcción</a>
+                        <a class="collapse-item " href="ordenes.php">Nueva orden</a>
+                        <a class="collapse-item" href="showOrdenes.php">Ordenes abiertas</a>
+                        <a class="collapse-item" href="CloseOrdenes.php">Historial de ordenes</a>
                     </div>
                 </div>
             </li>
@@ -120,9 +115,10 @@ if (isset($_SESSION['user'])) {
                     <span>Tecnicos</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Administrar</h6>
-                        <a class="collapse-item" href="">En Construcción</a>
+                        <a class="collapse-item" href="tecnicos.php">Administrar técnicos</a>
+                        <a class="collapse-item" href="planilla.php">Ver planilla</a>
                     </div>
                 </div>
             </li>
@@ -333,6 +329,7 @@ if (isset($_SESSION['user'])) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
         integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+        
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />

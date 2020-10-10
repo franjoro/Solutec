@@ -15,7 +15,9 @@ if (isset($_SESSION['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+
     <title>Project Manager</title>
+
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
     <!-- <link
@@ -61,7 +63,7 @@ if (isset($_SESSION['user'])) {
                     <span>Ordenes</span>
                 </a>
                 <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Ordenes</h6>
                         <a class="collapse-item " href="ordenes.php">Nueva orden</a>
                         <a class="collapse-item" href="showOrdenes.php">Ordenes abiertas</a>
@@ -120,7 +122,7 @@ if (isset($_SESSION['user'])) {
                     <span>Tecnicos</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Administrar</h6>
                         <a class="collapse-item" href="tecnicos.php">Administrar técnicos</a>
                         <a class="collapse-item" href="planilla.php">Ver planilla</a>
@@ -203,7 +205,7 @@ if (isset($_SESSION['user'])) {
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Agregar nueva orden</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Editar orden</h1>
                     <div class="row">
                         <!-- Content Column -->
                         <div class="col-lg-12 mb-4">
@@ -221,10 +223,8 @@ if (isset($_SESSION['user'])) {
                                             <div class="form-group ">
 
 
-                                                <label for="inputEmail4">Seleccionar cliente *</label>
                                                 <select id="cliente" required
                                                     class="form-control form-control-sm selectClientes">
-                                                    <option disabled value="0" selected>Seleccionar Cliente</option>
                                                     <?php while($row = mysqli_fetch_array($clientesSql)){?>
                                                     <option value="<?php echo $row[0]?>" class="text-primary">
                                                         <?php echo $row[1]?></option>
@@ -240,6 +240,8 @@ if (isset($_SESSION['user'])) {
 
                                     <div class="card shadow mb-4">
                                         <div class="card-body">
+
+
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
@@ -262,7 +264,6 @@ if (isset($_SESSION['user'])) {
                                                                     Refrigerante</option>
                                                                 <option value="Cocina">Cocina</option>
                                                                 <option value="Lavadora">Lavadora</option>
-                                                                <option value="Refrigeradora">Refrigeradora</option>
                                                                 <option value="Oasis">Oasis</option>
                                                                 <option value="Otro">Otro</option>
                                                             </select>
@@ -285,6 +286,8 @@ if (isset($_SESSION['user'])) {
 
                                     <div class="card shadow mb-4">
                                         <div class="card-body">
+
+
 
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -313,7 +316,7 @@ if (isset($_SESSION['user'])) {
                                                             <label for="inputEmail4">Tipo de pago</label>
                                                             <select id="pago" 
                                                                 class="form-control form-control-sm">
-                                                                <option disabled selected value="All">Seleccionar tipo de pago
+                                                                <option disabled selected value="0">Seleccionar tipo de pago
                                                                 </option>
                                                                 <option value="1">Recibo</option>
                                                                 <option value="2">Crédito Fiscal</option>
@@ -322,15 +325,15 @@ if (isset($_SESSION['user'])) {
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="inputAddress">Fecha De entrega*</label>
-                                                            <input type="text" required
-                                                                class="form-control form-control-sm" id="datepicker"
-                                                                name="date">
+                                                            <input type="text"  required class="form-control form-control-sm"
+                                                                id="datepicker" name="date">
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="inputAddress">Código de factura</label>
                                                             <input type="text" class="form-control form-control-sm"
                                                                 id="factura" name="factura">
                                                         </div>
+
                                                     </div>
                                                 </div>
 
@@ -404,7 +407,7 @@ if (isset($_SESSION['user'])) {
                                     <div class="card-body">
                                         <div class="form-row">
                                             <div class="form-group col-md-3">
-                                                <label for="inputAddress">Precio Mano de obra*</label>
+                                                <label for="inputAddress">Precio total cliente*</label>
                                                 <input type="text" required class="form-control form-control-sm"
                                                     id="precioCliente" name="precioCliente">
                                             </div>
@@ -430,7 +433,7 @@ if (isset($_SESSION['user'])) {
                                                     name="utilidadNeta">
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="inputEmail4">Estado de orden*</label>
+                                                <label for="inputEmail4">Estado de orden</label>
                                                 <select id="estado" required class="form-control form-control-sm">
                                                     <option value="1">Abierta</option>
                                                     <option value="2">Pendiente de pago</option>
@@ -441,8 +444,9 @@ if (isset($_SESSION['user'])) {
                                         </div>
                                     </div>
                                 </div>
-                                <button id="New_button" onclick="add()"
-                                    class="btn btn-primary visible float-right">Agregar</button>
+
+                                <button id="New_button" onclick="edit()"
+                                    class="btn btn-primary visible float-right">Actualizar</button>
 
                                 <button id="loader" class="btn btn-primary invisible float-right" disabled>
                                     <span class="spinner-border spinner-border-sm" id="loader" role="status"
@@ -498,7 +502,7 @@ if (isset($_SESSION['user'])) {
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
+
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -512,7 +516,8 @@ if (isset($_SESSION['user'])) {
     <script src="js/ordenes.js"></script>
     <script>
     $(document).ready(function() {
-        $('.selectClientes').select2();
+        let itineracion = 0;
+        let total = 0;
         $('.materiales').select2();
         $("#datepicker").datepicker();
         fullTotal(total)
@@ -521,7 +526,57 @@ if (isset($_SESSION['user'])) {
         });
 
 
+        const id = $.urlParam('id');
+        getData(id);
+
+        // $('.selectClientes').select2();
     })
+
+    fillTboldata = (data, index) => {
+        let html = `<tr data-totalr="${data.preciou}"  class="it${index} table-primary" ><td><button onclick="deleteRowPermanente('${index}','${data.code}')" class="btn "><i class="fas fa-trash"></i></button></td>   <td>${
+      data.cantidad
+    }</td><td>${data.nameProducto}</td> <td>$${
+      data.preciou
+    }</td> <td>${data.total}</td></tr>`;
+
+        $("#tablaMateriales").append(html);
+    }
+
+    getData = async (id) => {
+        const queries = await Promise.all([$.ajax(`php/ordenes/editOrdenes.php?id=${id}&op=1`), $.ajax(
+                `php/ordenes/editOrdenes.php?id=${id}&op=2`)]),
+            query = JSON.parse(queries[0]),
+            data = JSON.parse(queries[1]);
+        $(`#cliente option[value='${query.codeCliente}'`).attr("selected", "selected");
+        $(`#tecnico option[value='${query.tecCode}'`).attr("selected", "selected");
+        $(`#articulo option[value='${query.articulo}'`).attr("selected", "selected");
+        $(`#estado option[value='${query.status}'`).attr("selected", "selected");
+        $("#marca").val(query.marca)
+        $("#trabajoR").val(query.work)
+        $("#falla").val(query.falla)
+        $("#factura").val(query.codFactura)
+        $(`#pago option[value='${query.tipoPago}'`).attr("selected", "selected");
+        $("#datepicker").val(query.date)
+        $("#precioCliente").val(query.precio)
+        $("#utilidadTec").val(query.UTec)
+        $("#utilidadNeta").val(query.UNeta)
+        if (query.iva === "1") {
+            $(`#gridCheck`).prop('checked', true);
+        }
+        itineracion = data.length;
+        data.map((data, index) => {
+            total = currency(total).add(data.total);
+            fullTotal(total);
+            fillTboldata(data, index)
+            saveArr[index] = {
+                cantidad: data.cantidad,
+                total: data.total,
+                code: data.codeInve,
+                new: false
+            };
+        })
+
+    }
     </script>
 </body>
 

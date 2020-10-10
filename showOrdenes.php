@@ -199,95 +199,44 @@ include("./php/conexion.php")
                 </nav>
                 <!-- End of Topbar -->
 
+
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Proveedor</h1>
-
-
-
+                    <h1 class="h3 mb-4 text-gray-800">Ordenes Abiertas</h1>
                     <div class="row">
-                        <!-- Content Column -->
-                        <div class="col-lg-3 mb-4">
-                            <!-- Project Card Example -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Agregar nuevo proveedor</h6>
-
-                                </div>
-                                <div class="card-body">
-                                    <form id="providersForm">
-                                        <div class="form-group">
-                                            <label for="inputAddress">Nombre *</label>
-                                            <input type="text" required class="form-control form-control-sm" id="name"
-                                                name="name">
-                                        </div>
-
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="inputEmail4">Dirección</label>
-                                                <input type="text" class="form-control form-control-sm"
-                                                    name="direccion">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="inputPassword4">Teléfono</label>
-                                                <input type="text" class="form-control form-control-sm" name="tel">
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="inputEmail4">Contacto</label>
-                                                <input type="text" class="form-control" name="contacto">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="inputPassword4">Tel. Contacto</label>
-                                                <input type="text" class="form-control" name="telContacto">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="inputAddress2">Notas</label>
-                                            <textarea class="form-control form-control-sm" name="notas"></textarea>
-
-                                        </div>
-                                        <button id="New_button" type="submit"
-                                            class="btn btn-primary visible">Insert</button>
-                                    </form>
-
-                                    <button id="loader" class="btn btn-primary invisible" disabled>
-                                        <span class="spinner-border spinner-border-sm" id="loader" role="status"
-                                            aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-9 mb-4">
-                            <!-- Illustrations -->
+                        <div class="col-lg-12 mb-4">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">
-                                        Tabla de proveedores
+                                        Directorio de clientes
                                     </h6>
                                 </div>
                                 <div class="card-body">
+
+
                                     <div class="table-responsive">
-                                        <div id="clientProviders"></div>
+                                        <div id="clientTable"></div>
                                     </div>
                                 </div>
                             </div>
+
                             <!-- Approach -->
                         </div>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
+
             </div>
             <!-- End of Main Content -->
+
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <!-- <span>Copyright &copy; Your Website 2019</span> -->
+                        <!-- <span>Copyright &copy; Your Website 2020</span> -->
                     </div>
                 </div>
             </footer>
@@ -329,23 +278,108 @@ include("./php/conexion.php")
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- <script src="vendor/jquery-easing/jquery.easing.min.js"></script> -->
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
     <!-- Page level plugins -->
+
+
+    <!-- all my things -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js">
     </script>
-
-    <!-- Page level custom scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <script src="js/request_handler.js"></script>
-
+    <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
     <script>
     $(document).ready(function() {
-        tablaProvedores();
+        tabla()
     })
+
+    tabla = () => {
+        $.ajax({
+            url: "php/ordenes/tabla.php"
+        }).done(function(e) {
+            $("#clientTable").html(e), $("#dataTable").DataTable();
+        });
+    }
+
+    const borrar = (e) => {
+        Swal.fire({
+            title: "¿Estas seguro?",
+            text: "No sera posible revertir esta acción ID: " + e,
+            icon: "warning",
+            showCancelButton: !0,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Si, Borrar",
+        }).then((t) => {
+            if (t.value) {
+                $.ajax({
+                    url: "php/ordenes/eliminar.php?id=" + e
+                }).done(() => {
+                    Swal.fire("Eliminado", "La orden ha sido eliminada correctamente.", "success")
+                        .then(
+                            () => {
+                                tabla();
+                            }
+                        )
+                });
+            }
+        });
+    };
+
+    const ChangeS = async id => {
+        const {
+            value: formValues
+        } = await Swal.fire({
+            title: 'Cambiar estado de orden',
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            html: `
+            <div class="form-group" id="Proyectoos" >
+                <select id='estadoSelectC' class='form-control' >
+                    <option disabled value="000" selected>Seleccionar estado</option>
+                    <option value="1">Abierta</option>
+                    <option value="2">Pendiente de pago</option>
+                    <option value="3">Pendiende de confirmación</option>
+                    <option value="0">Cerrada</option>
+                </select>
+            </div>
+            `,
+            focusConfirm: false,
+            preConfirm: () => {
+                if ($("#estadoSelectC")
+                    .children("option:selected")
+                    .val() == '000') {
+                    alert("Elegir estado correctamente")
+                } else {
+                    return [
+                        $("#estadoSelectC")
+                        .children("option:selected")
+                        .val()
+                    ]
+                }
+
+            }
+        })
+
+        if (formValues) {
+            const data = formValues
+            $.ajax({
+                type: "POST",
+                url: "php/edit.php",
+                data: {campo: data[0], tabla : "tb_ordenmain", columna: "status", code: id}
+            }).done((data) => {
+                tabla();
+                console.log(data);
+                Swal.fire("OK", "Work Done", "success");
+            });
+        }
+    }
     </script>
+
+
 </body>
 
 </html>

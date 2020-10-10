@@ -24,6 +24,9 @@
       }if($ope == 0){
         $opT = "Disminución";
         $color = "red";
+      }if($ope == 2){
+        $opT = "Ocupado en Orden";
+        $color = "black";
       }
     ?>
         <tr>
