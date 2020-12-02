@@ -1,6 +1,8 @@
 <?php session_start();
 if (isset($_SESSION['user'])) {
-    include("./php/conexion.php")
+    include("./php/conexion.php");
+    $clientesSql = mysqli_query($mysqli,"SELECT code, name FROM tb_clientes");
+    $tecnicosSql = mysqli_query($mysqli,"SELECT code, nombre FROM tb_tecnico");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -284,14 +286,35 @@ if (isset($_SESSION['user'])) {
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                    Reportes de Ordenes/Inventario 
+                                                    Reportes de Ordenes/Inventario
                                                 </div>
                                                 <div class="h6 mb-0 font-weight-bold text-gray-800">
-                                                   Descarga tu información
+                                                    Descarga tu información
                                                 </div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-paperclip fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <a href="" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                <div class="card border-left-danger shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                    Agregar orden acceso directo
+                                                </div>
+                                                <div class="h6 mb-0 font-weight-bold text-gray-800">
+                                                    Nueva orden rápida
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-plus fa-2x text-gray-300"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -308,6 +331,47 @@ if (isset($_SESSION['user'])) {
                 <!-- /.container-fluid -->
             </div>
             <!-- End of Main Content -->
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Ingresar orden rápido</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="php/ordenes/addrapido.php" method="POST">
+                                <label for="inputEmail4">Seleccionar cliente *</label>
+                                <select required id="cliente" name="cliente"  required class="form-control form-control-sm selectClientes">
+                                    <?php while($row = mysqli_fetch_array($clientesSql)){?>
+                                    <option value="<?php echo $row[0]?>" class="text-primary">
+                                        <?php echo $row[1]?></option>
+                                    <?php }?>
+                                </select>
+                                <hr>
+                                <label for="inputEmail4">Seleccionar Técnico *</label>
+                                <select required id="tec" name="tecnico"  required class="form-control form-control-sm selectClientes">
+                                    <?php while($row = mysqli_fetch_array($tecnicosSql)){?>
+                                    <option value="<?php echo $row[0]?>" class="text-primary">
+                                        <?php echo $row[1]?></option>
+                                    <?php }?>
+                                </select>
+                                <hr>
+                                <label for="">Descripción de falla</label>
+                                <textarea required type="text" class="form-control form-control-sm" name="falla"
+                                    rows="3"></textarea>
+                           
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-primary" value="Save changes">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">

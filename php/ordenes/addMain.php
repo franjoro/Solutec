@@ -11,7 +11,8 @@ if ($_GET['id'] == 1) {
     $uTec = $_POST['UTec'];
     $iva = $_POST['iva'];
     $estado = $_POST['estado'];
-    $sql = mysqli_query($mysqli, "INSERT INTO tb_ordenMain(codeCliente,precio,tecCode,UNeta,UTec,iva,codFactura,tipoPago,status) VALUES (
+    $porcentaje = $_POST['porcentaje'];
+    $sql = mysqli_query($mysqli, "INSERT INTO tb_ordenMain(codeCliente,precio,tecCode,UNeta,UTec,iva,codFactura,tipoPago,status,tec_porcentaje) VALUES (
         '" . $cliente . "', 
         '" . $precio . "', 
         '" . $tecnico . "', 
@@ -20,7 +21,8 @@ if ($_GET['id'] == 1) {
         '" . $iva . "', 
         '" . $factura . "', 
         '" . $pago . "', 
-        '" . $estado . "'
+        '" . $estado . "',
+        '" . $porcentaje . "'
          )");
     echo mysqli_error($mysqli);
     echo mysqli_insert_id($mysqli);

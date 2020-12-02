@@ -124,6 +124,11 @@ $("#precioCliente").change(function () {
   actualizarPrecios();
 });
 
+$("#utilidadNetaPor").change(function () {
+  actualizarPrecios();
+});
+
+
 $("#gridCheck").click(function () {
   actualizarPrecios();
 });
@@ -135,9 +140,10 @@ actualizarPrecios = () => {
   } else {
     precio = $("#precioCliente").val();
   }
-
-  (tec = currency(currency(precio) * 0.4).format()),
-    (utilidad = currency(currency(precio) * 0.6).format());
+  let porcentajeTec  = ( $("#utilidadNetaPor").val() /100 );
+  let porcentajeUti = ( (100- $("#utilidadNetaPor").val() ) /100);
+  (tec = currency(currency(precio) * porcentajeTec ).format()),
+    (utilidad = currency(currency(precio) * porcentajeUti ).format());
   $("#utilidadTec").val(tec);
   $("#utilidadNeta").val(utilidad);
 };
@@ -159,8 +165,8 @@ add = async () => {
     articulo = $("#articulo").children("option:selected").val(),
     marca = $("#marca").val(),
     date = $("#datepicker").val(),
-    falla = $("#falla").val();
-
+    falla = $("#falla").val(),
+    porcentaje = $("#utilidadNetaPor").val();
   if (
     cliente == 0 ||
     tecnico == 0 ||
@@ -174,7 +180,7 @@ add = async () => {
   const query1 = await $.ajax({
     url: "php/ordenes/addMain.php?id=1",
     type: "POST",
-    data: { cliente, precio, tecnico, uNeta, UTec, iva, estado,factura,pago },
+    data: { cliente, precio, tecnico, uNeta, UTec, iva, estado,factura,pago, porcentaje },
   });
   console.log(query1);
   const queries = await Promise.all([
@@ -213,7 +219,7 @@ edit = async () => {
     marca = $("#marca").val(),
     date = $("#datepicker").val(),
     falla = $("#falla").val();
-
+    porcentaje = $("#utilidadNetaPor").val();
   if (
     cliente == 0 ||
     tecnico == 0 ||
@@ -229,7 +235,7 @@ edit = async () => {
     $.ajax({
       url: "php/ordenes/editO.php?id=1",
       type: "POST",
-      data: { cliente, precio, tecnico, uNeta, UTec, iva, estado, upcode, factura, pago },
+      data: { cliente, precio, tecnico, uNeta, UTec, iva, estado, upcode, factura, pago, porcentaje },
     })
     ,$.ajax({
       url: "php/ordenes/editO.php?id=2",

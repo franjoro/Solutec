@@ -406,7 +406,7 @@ if (isset($_SESSION['user'])) {
                                 <div class="card shadow mb-4">
                                     <div class="card-body">
                                         <div class="form-row">
-                                            <div class="form-group col-md-3">
+                                            <div class="form-group col-md-2">
                                                 <label for="inputAddress">Precio total cliente*</label>
                                                 <input type="text" required class="form-control form-control-sm"
                                                     id="precioCliente" name="precioCliente">
@@ -420,6 +420,11 @@ if (isset($_SESSION['user'])) {
                                                     </label>
                                                 </div>
                                             </div>
+                                            <div class="form-group col-md-52">
+                                                <label for="inputAddress">% Utilidad Técnico</label>
+                                                <input type="number" value="40" max="100" min="0" class="form-control form-control-sm"
+                                                    id="utilidadNetaPor" name="utilidadNeta">
+                                            </div>
                                             <div class="form-group col-md-2">
                                                 <label for="inputAddress">Utilidad Tec.</label>
                                                 <input type="text" value="0" disabled
@@ -432,7 +437,7 @@ if (isset($_SESSION['user'])) {
                                                     class="form-control form-control-sm" id="utilidadNeta"
                                                     name="utilidadNeta">
                                             </div>
-                                            <div class="form-group col-md-3">
+                                            <div class="form-group col-md-2">
                                                 <label for="inputEmail4">Estado de orden</label>
                                                 <select id="estado" required class="form-control form-control-sm">
                                                     <option value="1">Abierta</option>
@@ -558,8 +563,9 @@ if (isset($_SESSION['user'])) {
         $(`#pago option[value='${query.tipoPago}'`).attr("selected", "selected");
         $("#datepicker").val(query.date)
         $("#precioCliente").val(query.precio)
-        $("#utilidadTec").val(query.UTec)
-        $("#utilidadNeta").val(query.UNeta)
+        $("#utilidadTec").val(query.UNeta)
+        $("#utilidadNeta").val(query.UTec)
+        $("#utilidadNetaPor").val(query.tec_porcentaje)        
         if (query.iva === "1") {
             $(`#gridCheck`).prop('checked', true);
         }

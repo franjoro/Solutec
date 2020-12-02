@@ -311,9 +311,9 @@ if (isset($_SESSION['user'])) {
                                                         </div>
                                                         <div class="form-group col-md-3">
                                                             <label for="inputEmail4">Tipo de pago</label>
-                                                            <select id="pago" 
-                                                                class="form-control form-control-sm">
-                                                                <option disabled selected value="All">Seleccionar tipo de pago
+                                                            <select id="pago" class="form-control form-control-sm">
+                                                                <option disabled selected value="All">Seleccionar tipo
+                                                                    de pago
                                                                 </option>
                                                                 <option value="1">Recibo</option>
                                                                 <option value="2">Crédito Fiscal</option>
@@ -403,7 +403,7 @@ if (isset($_SESSION['user'])) {
                                 <div class="card shadow mb-4">
                                     <div class="card-body">
                                         <div class="form-row">
-                                            <div class="form-group col-md-3">
+                                            <div class="form-group col-md-2">
                                                 <label for="inputAddress">Precio Mano de obra*</label>
                                                 <input type="text" required class="form-control form-control-sm"
                                                     id="precioCliente" name="precioCliente">
@@ -417,6 +417,11 @@ if (isset($_SESSION['user'])) {
                                                     </label>
                                                 </div>
                                             </div>
+                                            <div class="form-group col-md-52">
+                                                <label for="inputAddress">% Utilidad Técnico</label>
+                                                <input type="number" value="40" max="100" min="0" class="form-control form-control-sm"
+                                                    id="utilidadNetaPor" name="utilidadNeta">
+                                            </div>
                                             <div class="form-group col-md-2">
                                                 <label for="inputAddress">Utilidad Tec.</label>
                                                 <input type="text" value="0" disabled
@@ -429,7 +434,8 @@ if (isset($_SESSION['user'])) {
                                                     class="form-control form-control-sm" id="utilidadNeta"
                                                     name="utilidadNeta">
                                             </div>
-                                            <div class="form-group col-md-3">
+
+                                            <div class="form-group col-md-2">
                                                 <label for="inputEmail4">Estado de orden*</label>
                                                 <select id="estado" required class="form-control form-control-sm">
                                                     <option value="1">Abierta</option>

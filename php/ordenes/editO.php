@@ -11,7 +11,7 @@ if ($_GET['id'] == 1) {
     $estado = $_POST['estado'];
     $factura = $_POST['factura'];
     $pago = $_POST['pago'];
-
+    $porcentaje = $_POST['porcentaje'];
 
     $sql = "UPDATE tb_ordenMain
     SET 
@@ -23,7 +23,8 @@ if ($_GET['id'] == 1) {
     codFactura = '" . $factura . "', 
     tipoPago = '" . $pago . "', 
     iva = '" . $iva . "', 
-    status = '" . $estado . "'
+    status = '" . $estado . "',
+    tec_porcentaje	= '" . $porcentaje . "'
     WHERE code = '".$_POST['upcode']."'
 ";
     mysqli_query($mysqli, $sql);

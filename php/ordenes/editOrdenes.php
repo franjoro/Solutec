@@ -2,7 +2,7 @@
 require_once("../conexion.php");
 $id = $_GET['id'];
 if($_GET['op'] == 1){
-    $sql = "SELECT `tb_ordenmain`.`codeCliente`, `tb_ordenmain`.`tecCode`, `tb_ordenmain`.`precio`, `tb_ordenmain`.`UNeta`, `tb_ordenmain`.`UTec`, `tb_ordenmain`.`iva`, `tb_ordenmain`.`status`, `tb_ordendata`.`work`, `tb_ordendata`.`articulo`, `tb_ordendata`.`marca`, `tb_ordendata`.`date`, `tb_ordendata`.`falla`, `tb_ordenmain`.`codFactura`, `tb_ordenmain`.`tipoPago` FROM `tb_ordenmain` LEFT JOIN `tb_ordendata` ON `tb_ordendata`.`codeOrden` = `tb_ordenmain`.`code` WHERE tb_ordenmain.code= '".$id."' ; ";
+    $sql = "SELECT `tb_ordenmain`.`codeCliente`, `tb_ordenmain`.`tecCode`, `tb_ordenmain`.`precio`, `tb_ordenmain`.`UNeta`, `tb_ordenmain`.`UTec`, `tb_ordenmain`.`iva`, `tb_ordenmain`.`status`, `tb_ordendata`.`work`, `tb_ordendata`.`articulo`, `tb_ordendata`.`marca`, `tb_ordendata`.`date`, `tb_ordendata`.`falla`, `tb_ordenmain`.`codFactura`, `tb_ordenmain`.`tipoPago` , `tb_ordenmain`.`tec_porcentaje` FROM `tb_ordenmain` LEFT JOIN `tb_ordendata` ON `tb_ordendata`.`codeOrden` = `tb_ordenmain`.`code` WHERE tb_ordenmain.code= '".$id."' ; ";
 
     $query = mysqli_query($mysqli,$sql);
     $row = mysqli_fetch_assoc($query);
